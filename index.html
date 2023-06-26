@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="gstInput">
+    <button onclick="fetchData()">Fetch Data</button>
+  
+    <script>
+        function fetchData() {
+            const gstInput = document.getElementById('gstInput').value;
+            
+            fetch('/gst', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    GSTIN: gstInput
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    // Handle the parsed JSON data
+                    alert(data);
+                })
+                .catch(error => {
+                    // Handle any errors
+                    console.error(error);
+                    alert(error);
+                });}
+    </script>
+</body>
+</html>
